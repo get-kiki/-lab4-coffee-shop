@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "dependencies": {
     "bcryptjs": "^3.0.3",
     "cors": "^2.8.5",
@@ -6,5 +7,19 @@
     "joi": "^18.0.2",
     "mysql2": "^3.16.0",
     "sequelize": "^6.37.7"
+=======
+  "name": "nv-webblog-server",
+  "version": "1.0.0",
+  "description": "nodejs vuejs webblog server (backend)",
+  "license": "ISC",
+  "author": "Nattapon Kumyaito",
+  "type": "commonjs",
+  "main": "src/app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "^5.2.1"
+>>>>>>> d314bee070ec11f83c71fd674eb967b44d9d3378
   }
 }
