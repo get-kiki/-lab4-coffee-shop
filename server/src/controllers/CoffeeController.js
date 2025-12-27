@@ -1,29 +1,54 @@
-// src/controllers/CoffeeController.js
+const { Coffee } = require('../models')
+
 module.exports = {
-    // ดูรายการกาแฟทั้งหมด
-    index (req, res) {
-        res.send('เรียกดูรายการกาแฟทั้งหมด (Menu)')
-    },
 
-    // เพิ่มเมนูกาแฟใหม่
-    create (req, res) {
-        // รับข้อมูล JSON เมนูกาแฟจากหน้าบ้าน
-        res.send('สร้างเมนูกาแฟ: ' + JSON.stringify(req.body))
-    },
+  // ดูรายการกาแฟทั้งหมด
+  async index (req, res) {
+    const coffees = await Coffee.findAll()
+    res.send(coffees)
+  },
 
-    // แก้ไขข้อมูลกาแฟ (เช่น ปรับราคา)
-    put (req, res) {
-        res.send('แก้ไขกาแฟ ID: ' + req.params.coffeeId + ' ข้อมูล: ' + JSON.stringify(req.body))
-    },
-
-    // ลบเมนูกาแฟ
-    remove (req, res) {
-        res.send('ลบกาแฟ ID: ' + req.params.coffeeId)
-    },
-
-  // ดูรายละเอียดกาแฟ 1 รายการ
-    show (req, res) {
-        res.send('ดูข้อมูลกาแฟ ID: ' + req.params.coffeeId)
+  // เพิ่มเมนูกาแฟใหม่
+  async create (req, res) {
+    try {
+      const coffee = await Coffee.create(req.body)
+      res.send(coffee)
+    } catch (err) {
+      res.status(500).send(err)
     }
+  },
+
+  // แก้ไขข้อมูลกาแฟ
+  async put (req, res) {
+    try {
+      await Coffee.update(req.body, {
+        where: { id: req.params.coffeeId }
+      })
+      res.send({ message: 'Coffee updated' })
+    } catch (err) {
+      res.status(500).send(err)
+    }
+  },
+
+  // ลบเมนูกาแฟ
+  async remove (req, res) {
+    try {
+      await Coffee.destroy({
+        where: { id: req.params.coffeeId }
+      })
+      res.send({ message: 'Coffee deleted' })
+    } catch (err) {
+      res.status(500).send(err)
+    }
+  },
+
+  // ดูรายละเอียดกาแฟ
+  async show (req, res) {
+    try {
+      const coffee = await Coffee.findByPk(req.params.coffeeId)
+      res.send(coffee)
+    } catch (err) {
+      res.status(500).send(err)
+    }
+  }
 }
-    
