@@ -1,3 +1,3 @@
 # nv-webblog68
-thanakorn nakphook
+thanaphat teeraphatchararunksi
 CSIT
